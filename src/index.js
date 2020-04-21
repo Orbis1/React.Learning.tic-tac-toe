@@ -88,8 +88,8 @@ class Game extends React.Component {
 
     const moves = history.map((step, move) => {
       const desc = move ?
-        'Перейти к ходу #' + move :
-        'К началу игры';
+        'Go to step#' + move :
+        'Go to start';
       return (
         <li key={move}>
           <button onClick={() => this.jumpTo(move)}>{desc}</button>
@@ -105,28 +105,25 @@ class Game extends React.Component {
     }
 
     return (
-      <div className="game">
-        <div className="game-board">
+     <div className="container">
+        <div className="item-a">
           <Board 
             squares={current.squares}
             onClick={i => this.handleClick(i)}
           />
         </div>
-        <div className="game-info">
+        <div className="item-b">
           <div>{status}</div>
           <ol>{moves}</ol>
         </div>
-      </div>
+     </div>
     );
   }
 }
 
 // ========================================
 
-ReactDOM.render(
-  <Game />,
-  document.getElementById('root')
-);
+ReactDOM.render(<Game />, document.getElementById('root'));
 
 function calculateWinner(squares) {
   const lines = [
