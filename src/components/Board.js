@@ -1,18 +1,34 @@
 import React from 'react';
 import Square from './Square.js';
+import { actionIncreaseStep } from '../store/actions.js';
 
 export default function Board(props) {
-    const SIZE_OF_BOARD = 3;  
+    const {dispatch} = props;
 
-    const board = Array(SIZE_OF_BOARD).fill(
-        <div className="board-row">
-            {Array(SIZE_OF_BOARD).fill(<Square />)}
-        </div>
-    );
+    const SIZE_OF_SIDE = 3;
+    const SIZE_OF_BOARD = SIZE_OF_SIDE * SIZE_OF_SIDE;
+
+    const blocks = Array(SIZE_OF_BOARD);
+
+    for (let i = 0; i < blocks.length; i++) {
+        blocks[i] = <Square onClick={props.onClick} value = {i}/>
+    };
+
+    const wrapedRows = []; 
+
+    for (let i = 0; i < SIZE_OF_BOARD; i+=3) {
+        const start = i;
+        const end = i + 3;
+        const rows = blocks.slice(start, end);
+        wrapedRows.push(
+            <div className="board-row"> {rows} </div>
+        );
+        
+    };
 
     return (
         <div>
-            {board}
+            {wrapedRows}
         </div>
     );
 }
