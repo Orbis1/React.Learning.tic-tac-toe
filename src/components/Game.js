@@ -1,6 +1,37 @@
 import React from 'react';
 import Board from './Board.js';
+import { clickCell } from '../store/actions.js';
 
+export default function Game(props) {
+    const {dispatch, history, stepNumber, status, gameOver} = props;
+    const current = history[stepNumber];
+
+    const onClick = (i) => {
+        if(gameOver === false) {
+            return dispatch(clickCell(i));
+        } else {
+            return;
+        }
+    };
+
+    return (
+        <div className="container">
+            <div className="item-a">
+                <Board 
+                    squares={current.squares}
+                    onClick={onClick}
+                />
+            </div>
+            <div className="item-b">
+                <div>{status}</div>
+                <ol>moves</ol>
+            </div>
+        </div>
+        );
+
+}
+
+/*
 export default class Game extends React.Component {
     constructor(props) {
       super(props);
@@ -43,6 +74,7 @@ export default class Game extends React.Component {
       const history = this.state.history;
       const current = history[this.state.stepNumber];
       const winner = calculateWinner(current.squares);
+      const dispatch = this.props.dispatch;
   
       const moves = history.map((step, move) => {
         const desc = move ?
@@ -67,7 +99,8 @@ export default class Game extends React.Component {
           <div className="item-a">
             <Board 
               squares={current.squares}
-              onClick={i => this.handleClick(i)}
+
+              onClick={() => this.props.dispatch(actionIncreaseStep)}
             />
           </div>
           <div className="item-b">
@@ -78,7 +111,7 @@ export default class Game extends React.Component {
       );
     }
   }
-
+*/
   function calculateWinner(squares) {
     const lines = [
       [0,1,2],

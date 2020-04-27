@@ -1,9 +1,7 @@
 import React from 'react';
 import Square from './Square.js';
-import { actionIncreaseStep } from '../store/actions.js';
 
 export default function Board(props) {
-    const {dispatch} = props;
 
     const SIZE_OF_SIDE = 3;
     const SIZE_OF_BOARD = SIZE_OF_SIDE * SIZE_OF_SIDE;
@@ -11,7 +9,7 @@ export default function Board(props) {
     const blocks = Array(SIZE_OF_BOARD);
 
     for (let i = 0; i < blocks.length; i++) {
-        blocks[i] = <Square onClick={props.onClick} value = {i}/>
+        blocks[i] = <Square onClick={() => props.onClick(i)} value={props.squares[i]}/>
     };
 
     const wrapedRows = []; 
@@ -23,10 +21,10 @@ export default function Board(props) {
         wrapedRows.push(
             <div className="board-row"> {rows} </div>
         );
-        
     };
 
     return (
+
         <div>
             {wrapedRows}
         </div>
