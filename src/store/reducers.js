@@ -32,7 +32,8 @@ export const rootReducer = (state = initialState, action) => {
 
     switch (action.type) {
         case 'CLICK_CELL':
-            const { stepNumber, number } = action.payload;
+            const { number } = action.payload;
+            let stepNumber = state.stepNumber;
             const history = state.history.slice(0, stepNumber + 1);
             const current = history[history.length - 1];
             const squares = current.squares.slice();
@@ -55,7 +56,9 @@ export const rootReducer = (state = initialState, action) => {
                 status = "Next player: " + (xIsNext ? "O" : "X");
                 gameOver = false;
               }
-            
+
+            stepNumber++
+
             return {
                 ...state,
                 history: history.concat([
@@ -63,7 +66,7 @@ export const rootReducer = (state = initialState, action) => {
                       squares: squares
                     }
                   ]),
-                stepNumber: history.length,
+                stepNumber: stepNumber,
                 xIsNext: !xIsNext,
                 status: status,
                 gameOver: gameOver,
