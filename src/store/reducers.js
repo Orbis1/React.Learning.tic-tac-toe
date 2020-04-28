@@ -33,7 +33,6 @@ export const rootReducer = (state = initialState, action) => {
     switch (action.type) {
         case 'CLICK_CELL':
             const { stepNumber, number } = action.payload;
-
             const history = state.history.slice(0, stepNumber + 1);
             const current = history[history.length - 1];
             const squares = current.squares.slice();
@@ -48,10 +47,6 @@ export const rootReducer = (state = initialState, action) => {
             squares[number] = xIsNext ? "X" : "O";
 
             const winner = calculateWinner(squares);
-            
-            console.log(`stepNumber in Action is ${stepNumber}`);
-            console.log(squares);
-            console.log(`winner ${winner}`);
 
             if (winner) {
                 status = "Winner: " + winner;

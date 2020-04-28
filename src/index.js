@@ -3,14 +3,11 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import Game from './components/Game.js';
 
-
 import { rootReducer } from './store/reducers.js';
 import { createStore } from 'redux';
 import {connect, Provider} from 'react-redux';
 
 const store = createStore(rootReducer);
-
-//ReactDOM.render(<Game />, document.getElementById('root'));
 
 const mapStateToProps = (state) => {
   return {
@@ -21,14 +18,6 @@ const mapStateToProps = (state) => {
     gameOver: state.gameOver,
   };
 };
-
-// const mapDispatchToProps = dispatch => {
-//   return {
-//       increase: () => dispatch({ type: 'INCREASE_STEP'}),
-//   };
-// };
-
-
 
 const WrappedGame = connect(mapStateToProps)(Game);
 

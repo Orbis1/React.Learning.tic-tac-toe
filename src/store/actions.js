@@ -1,5 +1,3 @@
-
-
 const CLICK_CELL = 'CLICK_CELL';
 
 let xstep = 0;
@@ -9,9 +7,8 @@ export const clickCell = (number) => {
     return {
         type: CLICK_CELL,
         payload: {
-            stepNumber: ++xstep,
+            stepNumber: ++xstep, //reducer
             number: number,
         }
     }
 };
-
