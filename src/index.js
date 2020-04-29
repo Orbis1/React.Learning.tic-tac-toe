@@ -13,7 +13,7 @@ const store = createStore(rootReducer,
 
 const mapStateToProps = (state) => {
   return {
-    history: state.history,
+    squares: state.squares,
     stepNumber: state.stepNumber,
     xIsNext: state.xIsNext,
     status: state.status,

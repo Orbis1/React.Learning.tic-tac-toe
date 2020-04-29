@@ -3,8 +3,9 @@ import Board from './Board.js';
 import { clickCell } from '../store/actions.js';
 
 export default function Game(props) {
-    const {dispatch, history, stepNumber, status, gameOver} = props;
-    const current = history[stepNumber];
+    const {dispatch, squares, status, gameOver} = props;
+    // const current = history[stepNumber];
+
 
     const onClick = (i) => {
         if(gameOver === false) {
@@ -18,7 +19,7 @@ export default function Game(props) {
         <div className="container">
             <div className="item-a">
                 <Board 
-                    squares={current.squares}
+                    squares={squares}
                     onClick={onClick}
                 />
             </div>

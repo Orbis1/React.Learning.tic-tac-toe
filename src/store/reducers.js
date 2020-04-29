@@ -1,7 +1,5 @@
 const initialState = {
-    history: [{
-        squares: Array(9).fill(null), 
-      }],
+    squares: Array(9).fill(null),
     stepNumber: 0,
     xIsNext: true,
     status: "Next player: X",
@@ -34,9 +32,10 @@ export const rootReducer = (state = initialState, action) => {
         case 'CLICK_CELL':
             const { number } = action.payload;
             let stepNumber = state.stepNumber;
-            const history = state.history.slice(0, stepNumber + 1);
-            const current = history[history.length - 1];
-            const squares = current.squares.slice();
+            // const history = state.history.slice(0, stepNumber + 1);
+            // const current = history[history.length - 1];
+            // const squares = current.squares.slice();
+            const squares = state.squares.slice();
             const xIsNext = state.xIsNext;
             let status = '';
             let gameOver;
@@ -61,11 +60,7 @@ export const rootReducer = (state = initialState, action) => {
 
             return {
                 ...state,
-                history: history.concat([
-                    {
-                      squares: squares
-                    }
-                  ]),
+                squares: squares,
                 stepNumber: stepNumber,
                 xIsNext: !xIsNext,
                 status: status,
