@@ -1,6 +1,8 @@
 import React from 'react';
 import Board from './Board.js';
 import { clickCell } from '../store/actions.js';
+import UndoRedo from '../containers/UndoRedo';
+
 
 export default function Game(props) {
     const {dispatch, squares, status, gameOver} = props;
@@ -24,8 +26,8 @@ export default function Game(props) {
                 />
             </div>
             <div className="item-b">
-                <div>{status}</div>
-                <ol>moves</ol>
+                <div>{status}</div>               
+                <UndoRedo />
             </div>
         </div>
         );

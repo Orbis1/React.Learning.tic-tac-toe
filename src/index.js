@@ -6,12 +6,15 @@ import Game from './components/Game.js';
 import { rootReducer } from './store/reducers.js';
 import { createStore } from 'redux';
 import {connect, Provider} from 'react-redux';
+import undoable from 'redux-undo';
+import { ActionCreators } from 'redux-undo';
 
-const store = createStore(rootReducer,
+const store = createStore(undoable(rootReducer),
   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
   );
 
 const mapStateToProps = (state) => {
+  state = state.present;
   return {
     squares: state.squares,
     stepNumber: state.stepNumber,
