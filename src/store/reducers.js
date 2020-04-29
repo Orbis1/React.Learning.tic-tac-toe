@@ -1,3 +1,4 @@
+
 const initialState = {
     squares: Array(9).fill(null),
     stepNumber: 0,
@@ -5,6 +6,10 @@ const initialState = {
     status: "Next player: X",
     gameOver: false,
 };
+
+// const rootReducer = combineReducers({
+//   document: undoable(documentReducer),
+// })
 
 export const rootReducer = (state = initialState, action) => {
 
@@ -28,17 +33,28 @@ export const rootReducer = (state = initialState, action) => {
         return null;
       }
 
+    function isArrayFull(array) {
+      let countOfEmpty = 0;
+      let i = array.length;
+
+      while (i--) {
+          if (array[i] == null)
+          countOfEmpty++;
+      }
+
+      return (countOfEmpty === 0);
+    }
+
     switch (action.type) {
         case 'CLICK_CELL':
             const { number } = action.payload;
             let stepNumber = state.stepNumber;
-            // const history = state.history.slice(0, stepNumber + 1);
-            // const current = history[history.length - 1];
-            // const squares = current.squares.slice();
             const squares = state.squares.slice();
             const xIsNext = state.xIsNext;
             let status = '';
             let gameOver;
+
+            console.log(squares.length);
 
             if (calculateWinner(squares) || squares[number]) {
                 return state;
@@ -47,7 +63,6 @@ export const rootReducer = (state = initialState, action) => {
             squares[number] = xIsNext ? "X" : "O";
 
             const winner = calculateWinner(squares);
-
             if (winner) {
                 status = "Winner: " + winner;
                 gameOver = true;
@@ -55,6 +70,12 @@ export const rootReducer = (state = initialState, action) => {
                 status = "Next player: " + (xIsNext ? "O" : "X");
                 gameOver = false;
               }
+
+            const isDraw = isArrayFull(squares) && !winner;
+            if (isDraw) {
+              status = "It is draw!";
+              gameOver = true;
+            }
 
             stepNumber++
 
