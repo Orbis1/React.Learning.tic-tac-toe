@@ -1,7 +1,9 @@
 import React from 'react';
 import Square from './Square.js';
+import { connect } from 'react-redux';
+import { clickCell } from '../actions/index';
 
-export default function Board(props) {
+let Board = ({ squares, onClick }) => {
 
     const SIZE_OF_SIDE = 3;
     const SIZE_OF_BOARD = SIZE_OF_SIDE * SIZE_OF_SIDE;
@@ -9,7 +11,7 @@ export default function Board(props) {
     const blocks = Array(SIZE_OF_BOARD);
 
     for (let i = 0; i < blocks.length; i++) {
-        blocks[i] = <Square onClick={() => props.onClick(i)} value={props.squares[i]} key={i}/>
+        blocks[i] = <Square key={i} onClick={() => onClick(i)} value={squares[i]} />
     };
 
     const wrapedRows = []; 
@@ -30,26 +32,18 @@ export default function Board(props) {
     );
 }
 
-/*
-  render() {
-    return (
-      <div>
-        <div className="board-row">
-          {this.renderSquare(0)}
-          {this.renderSquare(1)}
-          {this.renderSquare(2)}
-        </div>
-        <div className="board-row">
-          {this.renderSquare(3)}
-          {this.renderSquare(4)}
-          {this.renderSquare(5)}
-        </div>
-        <div className="board-row">
-          {this.renderSquare(6)}
-          {this.renderSquare(7)}
-          {this.renderSquare(8)}
-        </div>
-      </div>
-    );
-  }
-*/
+const mapStateToProps = (state) => {
+    return {
+        squares: state.gamePlay.present.squares,
+    }
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        onClick: (i) => dispatch(clickCell(i)),
+    }
+}
+
+Board = connect(mapStateToProps, mapDispatchToProps)(Board);
+
+export default Board;

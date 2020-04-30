@@ -67,6 +67,14 @@ ol, ul {
 }
 
 .item-b {
+  grid-column-start: 2;
+  grid-column-end: 3;
+  grid-row-start: 3;
+  grid-row-end: 4;
+  justify-self: center;
+}
+
+.item-c {
   grid-column-start: 3;
   grid-column-end: 4;
   grid-row-start: 2;
@@ -74,6 +82,10 @@ ol, ul {
   justify-self: center;
 }
 
-/* [id = 'root'] {
-  display: grid;
-} */
+.nameOfGame {
+  grid-column-start: 2;
+  grid-column-end: 3;
+  grid-row-start: 1;
+  grid-row-end: 2;
+  justify-self: center;
+}
