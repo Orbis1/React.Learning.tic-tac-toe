@@ -1,7 +1,7 @@
-const initialState = {
+const initialState =  {
     scores: [],
 };
-  
+
 const highScore = (state = initialState, action) => {
     switch (action.type) {
         case 'SOMEONE_WON':

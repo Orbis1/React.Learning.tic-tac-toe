@@ -69,7 +69,7 @@ const gamePlay = (state = initialState, action) => {
           const isDraw = isArrayFull(squares) && !winner;
           if (isDraw) {
             status = "It is draw!";
-            gameOver = true;
+            gameOver = false;
           }
 
           stepNumber++
@@ -82,9 +82,9 @@ const gamePlay = (state = initialState, action) => {
               status: status,
               gameOver: gameOver,
           };
+        default:
+          return state;
   }
-
-  return state;
 };
 
 const undoableGamePlay = undoable(gamePlay);
